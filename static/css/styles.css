@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 10;
+}
+
+#game {
+    text-align: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 5px;
+    margin: 20px auto;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background-color: #e0e0e0;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #d9534f;
+}
+
+
+.uml-block, .chat-block, .drawing-block {
+    border-radius: 15px; /* Bordes curvos */
+    background-color: #f9f9f9; /* Color de fondo claro */
+    border: 1px solid #ddd; /* Borde tenue */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Círculos de los usuarios conectados */
+.user-circle {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra en los círculos de usuarios */
+}
+

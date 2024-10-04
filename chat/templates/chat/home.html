@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Bienvenidos a RoomsUml2</h2>
+<h4>Elejir una de nuestras salas de chat</h4>
+
+
+{% if error_message %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{ error_message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+    
+
+{% for room in rooms  %}
+    <a class="btn btn-dark" href="{% url 'room' room.id %}">{{ room.name }}</a>
+{% endfor %}
+    
+{% endblock %}

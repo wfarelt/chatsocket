@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block style %}
+    <style>
+        .uml-block, .chat-block, .drawing-block {
+            border-radius: 15px; /* Bordes curvos */
+            background-color: #f9f9f9; /* Color de fondo claro */
+            border: 1px solid #ddd; /* Borde tenue */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        /* Círculos de los usuarios conectados */
+        .user-circle {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra en los círculos de usuarios */
+        }
+    </style>
+{% endblock style %}
+    
+
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row mt-4">
+
+        <!-- Diagrama UML -->
+        <div class="col-md-12 pb-4">
+            <div class="uml-block p-3 shadow">
+                <h2>UML Diagram</h2>                
+                <button onclick="createNewClass()" class="btn btn-primary">Add New Class</button>
+                <button onclick="exportDiagram()" class="btn btn-dark">Export UML</button>
+                <button onclick="prueba()" class="btn btn-success">Save</button>
+                <div id="myDiagramDiv" style="border: solid 1px black; width:100%; height:600px" class="mt-2"></div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                <!-- Sala de chat -->
+                <div class="col-md-4 pb-4">
+                    <div class="chat-block p-3 shadow">
+                        <div class="d-flex">
+                            <!-- Colocar iconos de usuarios conectados como círculos -->
+                            <ul class="list-group" id="usersList"></ul>
+                            <div class="user-circle bg-success text-white rounded-circle me-2 shadow" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                U1
+                            </div>
+                            <div class="user-circle bg-success text-white rounded-circle me-2 shadow" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                U2
+                            </div>
+                            <div class="user-circle bg-success text-white rounded-circle me-2 shadow" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                U3
+                            </div>
+                        </div>
+                        <h2>Sala de Chat: {{room.id}} {{room.name}}</h2>
+                        <h4 class="text-warning">Usuario: {{request.user}}</h4>
+                        <div id="boxMessages" style="height: 400px; overflow-y: auto;"></div>
+                        <div id="chat" class="mt-2">
+                            <input type="text" id="inputMessage" class="form-control" placeholder="Escribe un mensaje">
+                            <button class="btn btn-success mt-2" type="submit" id="btnMessage">Enviar</button>
+                            <a class="btn btn-primary mt-2 float-end" href="{% url 'home' %}">Salir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pizarra de dibujo -->
+                <div class="col-md-8">
+                    <div class="drawing-block p-3 shadow">
+                        <h2>Pizarra de Dibujo</h2>
+                        <canvas id="drawingBoard" width="500" height="400" style="border:1px solid black;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- Scripts -->
+<script>
+    var user = '{{request.user}}';
+    var room_id = '{{room.id}}';
+</script>
+<script src="{% static 'js/jquery-3.7.1.js' %}"></script>
+<script src="{% static 'js/chat.js' %}"></script>
+<script src="{% static 'js/pizarra.js' %}"></script>
+<script src="{% static 'js/uml2.js' %}"></script>
+
+{% endblock %}
